@@ -3,6 +3,7 @@
 
 typedef uint32_t num_type;
 #define MAX_DIGITS 9
+#define LALA 1
 
 #include "list.h"
 #include <iostream>
