@@ -6,31 +6,41 @@ Huge::Huge() {
     list.push_back(0);
 }
 
-/* Формирования большого числа из строки.
- * TODO: Имеется следующий баг: если первая цифра
- * следующего разряда - 0, то она не записывается.
- * Исправить это в выводе */
+/* Формирования большого числа из строки */
 Huge::Huge(std::string string) {
     int length = 0;
     num_type number = 0;
 
-    for (char c : string) {
+    /* разделение на подсписки по 9 цифр */
+    List<std::string> stringList;
+    std::string temp = "";
+    for (char c : reverseString(string)) {
         if (isDigit(c)) {
-            /* Если разряд уже содержит максимальное количество
-             * цифр,тогда переходим к следующему разряду */
             if (length == MAX_DIGITS) {
+                stringList.push_back(reverseString(temp));
                 length = 0;
-                list.push_front(number);
-                number = 0;
+                temp = "";
             }
 
-            // считываем очередную цифру разряда
             ++length;
-            number = number * 10 + (c - '0');
+            temp += c;
         }
     }
+    if (temp != "") {
+        stringList.push_back(reverseString(temp));
+    }
 
-    list.push_front(number);
+    /* Формирование большого числа */
+    auto iter = stringList.cbegin();
+    do {
+        for (char c : iter->value) {
+            number = number * 10 + (c - '0');
+        }
+        list.push_back(number);
+        number = 0;
+        iter = iter->next;
+    } while (iter != stringList.cbegin());
+
 }
 
 /* Конструктор копирования */
@@ -57,4 +67,22 @@ short Huge::getLength(num_type number) {
         ++length;
     } while (number != 0);
     return length;
+}
+
+/* Возвращает строку из count нулей */
+std::string Huge::zeros(short count) {
+    std::string returnString = "";
+    for (short i = 0; i < count; i++) {
+        returnString += '0';
+    }
+    return returnString;
+}
+
+// реверсирование строки
+std::string Huge::reverseString(std::string src) {
+    std::string reversedString;
+    for (char c : src) {
+        reversedString = c + reversedString;
+    }
+    return reversedString;
 }

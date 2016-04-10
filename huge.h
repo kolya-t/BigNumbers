@@ -1,12 +1,12 @@
 #ifndef HUGE_H
 #define HUGE_H
 
-typedef uint32_t num_type;
-#define MAX_DIGITS 9
-#define LALA 1
-
+#include <stdint.h>
 #include "list.h"
 #include <iostream>
+
+#define MAX_DIGITS 9
+typedef uint32_t num_type;
 
 
 class Huge {
@@ -35,9 +35,10 @@ public:
         // остальные разряды
         iterator = iterator->next;
         while (iterator != reverse_list.cbegin()) {
-            if (getLength(iterator->value) < MAX_DIGITS) {
-
-            }
+            // добавляем в начало разряда нули, если они должны быть
+            os << " "
+               << zeros(MAX_DIGITS - getLength(iterator->value))
+               << iterator->value;
 
             iterator = iterator->next;
         }
@@ -57,7 +58,9 @@ public:
     Huge& operator=(const Huge&);
 
     static bool isDigit(char);
-    static short getLength(num_type number);
+    static short getLength(num_type);
+    static std::string zeros(short);
+    static std::string reverseString(std::string);
 
 private:
     List<num_type> list;
