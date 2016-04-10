@@ -6,8 +6,8 @@ Huge::Huge() {
     list.push_back(0);
 }
 
-/* Формирования большого числа из строки */
-Huge::Huge(std::string string) {
+/* Формирование большого числа из строки */
+Huge::Huge(const std::string& string) {
     int length = 0;
     num_type number = 0;
 
@@ -42,6 +42,9 @@ Huge::Huge(std::string string) {
     } while (iter != stringList.cbegin());
 
 }
+
+/* Копирования списка */
+Huge::Huge(const List<num_type>& origList) : list(origList) {}
 
 /* Конструктор копирования */
 Huge::Huge(const Huge& orig) : list(orig.list) {}
@@ -78,11 +81,20 @@ std::string Huge::zeros(short count) {
     return returnString;
 }
 
-// реверсирование строки
-std::string Huge::reverseString(std::string src) {
+/* Реверсирование строки */
+std::string Huge::reverseString(const std::string& src) {
     std::string reversedString;
     for (char c : src) {
         reversedString = c + reversedString;
     }
     return reversedString;
+}
+
+/* Возведение base в стпень p */
+num_type Huge::pow(num_type base, short p) {
+    num_type retValue = 1;
+    for (int i = 0; i < p; i++) {
+        retValue *= base;
+    }
+    return retValue;
 }
