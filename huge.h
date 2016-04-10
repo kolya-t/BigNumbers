@@ -1,6 +1,6 @@
 #ifndef HUGE_H
 #define HUGE_H
-#define MAX_DIGITS (Huge::getLength((num_type)- 1)- 1)
+#define MAX_DIGITS (Huge::getLength((num_type) - 1) - 1)
 
 #include <stdint.h>
 #include "list.h"
@@ -38,7 +38,7 @@ public:
         iterator = iterator->next;
         while (iterator != reverse_list.cbegin()) {
             // добавляем в начало разряда нули, если они должны быть
-            os << " "
+            os << " " // Пробел между разрядами
                << zeros(MAX_DIGITS - getLength(iterator->value))
                << iterator->value;
 
