@@ -1,12 +1,14 @@
 #ifndef HUGE_H
 #define HUGE_H
+#define MAX_DIGITS (Huge::getLength((num_type)- 1)- 1)
 
 #include <stdint.h>
 #include "list.h"
 #include <iostream>
 
-#define MAX_DIGITS 9
-typedef uint32_t num_type;
+/* Для использования другого типа данных измените эту строку.
+ * Возможно использование только беззнаковых типов данных */
+typedef uint16_t num_type;
 
 
 class Huge {
