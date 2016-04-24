@@ -1,5 +1,4 @@
 #include <QCoreApplication>
-#include "bignumber.h"
 #include "huge.h"
 #include <QDebug>
 #include <QTextCodec>
